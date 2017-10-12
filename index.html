@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function () {
+            var oCanvas = document.querySelector("#cv");
+           /* var cxt=oCanvas.getContext("2d");
+            cxt.fillStyle="#FF0000";
+            cxt.fillRect(0,0,150,75);;*/
+            console.log('canvas的默认宽度与高度:' + '宽度:' + oCanvas.width + ',高度:' + oCanvas.height);
+        }
+    </script>
+</head>
+<body>
+<script>
+    ;(function () {
+        var oCanvas = document.createElement("canvas");
+        oCanvas.setAttribute('id', 'cv');
+        oCanvas.width = '600';
+        oCanvas.height = '400';
+        oCanvas.style.background='yellow';
+        document.body.appendChild(oCanvas);
+    })();
+</script>
+<canvas id="cv" ></canvas>
+<button onclick="draw()">画图</button>
+<canvas id="tutorial"></canvas>
+<script>
+    function draw() {
+        var canvas=document.getElementById('tutorial');
+        if(canvas.getContext){
+            var ctx=canvas.getContext('2d');
+            ctx.fillStyle = "rgb(200,0,0)";
+            ctx.fillRect (10, 10, 55, 50);
+            ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
+            ctx.fillRect (30, 30, 55, 50);
+
+            ctx.fillStyle = "rgba(0, 100, 150, 0.5)";
+            ctx.fillRect(25,25,100,100);
+            ctx.clearRect(45,45,60,60);
+            ctx.strokeRect(50,50,50,50);
+/*...................right...............................*/
+            ctx.beginPath();
+            ctx.moveTo(165,25);
+            ctx.lineTo(195,50);
+            ctx.lineTo(165,75);
+            ctx.fillStyle="black";
+            ctx.fill();
+            /*...................left...............................*/
+            ctx.beginPath();
+            ctx.moveTo(105,25);
+            ctx.lineTo(75,50);
+            ctx.lineTo(105,75);
+            ctx.fillStyle="green";
+            ctx.fill();
+            /*...................top...............................*/
+            ctx.beginPath();
+            ctx.moveTo(105,25);
+            ctx.lineTo(135,0);
+            ctx.lineTo(165,25);
+            ctx.fillStyle="orange";
+            ctx.fill();
+            /*...................bottom...............................*/
+            ctx.beginPath();
+            ctx.moveTo(105,75);
+            ctx.lineTo(165,75);
+            ctx.lineTo(135,100);
+            ctx.fillStyle="Pink";
+            ctx.fill();
+
+        }else{
+              alert('no')
+        }
+    }
+</script>
+<canvas id="canvas"></canvas>
+<script>
+    function myDraw() {
+
+        var d=document.getElementById('canvas');
+
+        if(d.getContext){
+            var txt=d.getContext('2d');
+            txt.beginPath();
+           /* txt.arc(75,75,70,0,Math.PI*2,true);
+            txt.moveTo(95,75);
+            txt.arc(75,75,20,0,Math.PI*1,true);
+            txt.moveTo(130,80);
+            txt.arc(80,80,50,0*Math.PI,Math.PI*1);*/
+
+
+          /*  txt.arc(75,75,50,0,Math.PI*2,true); // 绘制
+            txt.moveTo(110,75);
+            txt.arc(75,75,35,0,Math.PI,false);   // 口(顺时针)
+            txt.moveTo(65,65);
+            txt.arc(60,65,5,0,Math.PI*2,true);  // 左眼
+            txt.moveTo(95,65);
+            txt.arc(90,65,5,0,Math.PI*2,true);  // 右眼
+            txt.stroke();*/
+/*..............................二次贝塞尔曲线...........................................*/
+            txt.beginPath();
+            txt.moveTo(20,40);
+            txt.quadraticCurveTo(20,40,20,100);
+            txt.quadraticCurveTo(20,120,50,120);
+            txt.quadraticCurveTo(50,140,30,145);
+            txt.quadraticCurveTo(60,140,65,120);
+            txt.quadraticCurveTo(100,120,120,120);
+            txt.quadraticCurveTo(140,120,140,100);
+            txt.quadraticCurveTo(140,60,140,40);
+            txt.quadraticCurveTo(140,20,120,20);
+            txt.quadraticCurveTo(100,20,50,20);
+            txt.quadraticCurveTo(20,18,20,40);
+            txt.stroke();
+
+            txt.beginPath();
+            txt.moveTo(75,25);
+            txt.quadraticCurveTo(25,25,25,62.5);
+            txt.quadraticCurveTo(25,100,50,100);
+            txt.quadraticCurveTo(50,120,30,125);
+            txt.quadraticCurveTo(60,120,65,100);
+            txt.quadraticCurveTo(125,100,125,62.5);
+            txt.quadraticCurveTo(125,25,75,25);
+            txt.stroke();
+
+
+            txt.beginPath();
+            txt.moveTo(100,70);
+            txt.quadraticCurveTo(25,25,100,125);
+            txt.moveTo(100,70);
+            txt.quadraticCurveTo(175,25,100,125);
+            txt.stroke();
+            roundedRect(txt,10,10,50,100,12)
+        }
+    }
+
+    // 封装的一个用于绘制圆角矩形的函数.
+
+    function roundedRect(ctx,x,y,width,height,radius){
+        ctx.beginPath();
+        ctx.moveTo(x,y+radius);
+        ctx.lineTo(x,y+height-radius);
+        ctx.quadraticCurveTo(x,y+height,x+radius,y+height);
+        ctx.lineTo(x+width-radius,y+height);
+        ctx.quadraticCurveTo(x+width,y+height,x+width,y+height-radius);
+        ctx.lineTo(x+width,y+radius);
+        ctx.quadraticCurveTo(x+width,y,x+width-radius,y);
+        ctx.lineTo(x+radius,y);
+        ctx.quadraticCurveTo(x,y,x,y+radius);
+        ctx.stroke();
+    }
+    myDraw()
+</script>
+<canvas id="ColorBox"></canvas>
+<canvas id="Color"></canvas>
+<script>
+    function changeColor() {
+        var canvas=document.getElementById('ColorBox');
+        var d=canvas.getContext('2d');
+
+        for (var i=0;i<9;i++){
+            for (var j=0;j<9;j++){
+                d.fillStyle='rgb('+Math.floor(255-25*i)+','+Math.floor(255-22*j)+',0)';
+                d.fillRect(j*25,i*25,25,25);
+                d.strokeStyle = 'rgb(0,' + Math.floor(255-42.5*i) + ',' +
+                    Math.floor(255-42.5*j) + ')';
+                d.beginPath();
+                d.arc(13+j*25,13+i*25,10,0,Math.PI*2);
+                d.stroke()
+
+            }
+        }
+    }
+    changeColor();
+
+
+    function adraw() {
+        var ctx = document.getElementById('Color').getContext('2d');
+        // 画背景
+        ctx.fillStyle = '#FD0';
+        ctx.fillRect(0,0,75,75);
+        ctx.fillStyle = '#6C0';
+        ctx.fillRect(75,0,75,75);
+        ctx.fillStyle = '#09F';
+        ctx.fillRect(0,75,75,75);
+        ctx.fillStyle = '#F30';
+        ctx.fillRect(75,75,75,75);
+        ctx.fillStyle = '#FFF';
+        ctx.strokeStyle = '#09f';
+
+        // 设置透明度值
+        ctx.globalAlpha = 0.2;
+
+        // 画半透明圆
+        for (var i=0;i<7;i++){
+            ctx.beginPath();
+            ctx.arc(75,75,10+10*i,0,Math.PI*2,true);
+            ctx.fill();
+        }
+    }
+    adraw();
+</script>
+<canvas id="stock"></canvas>
+<script>
+    function strokeBox() {
+        var cc=document.getElementById('2d');
+
+    }
+</script>
+</body>
+</html>
